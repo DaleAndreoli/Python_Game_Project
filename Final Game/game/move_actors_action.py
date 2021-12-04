@@ -1,6 +1,8 @@
+import random
 from game import constants
 from game.action import Action
 from game.point import Point
+from game.enemy_fire import EnemyFire
 
 class MoveActorsAction(Action):
     """A code template for moving actors. The responsibility of this class of
@@ -19,6 +21,12 @@ class MoveActorsAction(Action):
         Args:
             cast (dict): The game actors {key: tag, value: list}.
         """
+        for enemy in cast["enemy"]:
+            enemy.update()
+            if random.randint(1, 100) <= 5:
+                fire = EnemyFire(enemy.get_fire_point())
+                cast["enemy_fire"].append(fire)
+
         for group in cast.values():
             for actor in group:
                 if not actor.get_velocity().is_zero():

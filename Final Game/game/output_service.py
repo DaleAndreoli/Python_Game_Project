@@ -34,17 +34,15 @@ class OutputService:
         """ 
         text = actor.get_text()
         position = actor.get_position()
+        color = actor.get_color()
         x = position.get_x()
         y = position.get_y()
-        self._screen.print_at(text, x, y, 7) # WHITE
-        # COLOUR_BLACK = 0
-        # COLOUR_RED = 1
-        # COLOUR_GREEN = 2
-        # COLOUR_YELLOW = 3
-        # COLOUR_BLUE = 4
-        # COLOUR_MAGENTA = 5
-        # COLOUR_CYAN = 6
-        # COLOUR_WHITE = 7
+
+        for text_y in range(len(text)):
+            for text_x in range(len(text[text_y])):
+                self._screen.print_at( text[text_y][text_x], (x + text_x), (y + text_y), color, transparent=True ) # WHITE
+
+
 
     def draw_actors(self, actors):
         """Renders the given list of actors on the screen.

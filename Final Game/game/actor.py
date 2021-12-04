@@ -18,9 +18,23 @@ class Actor:
     def __init__(self):
         """The class constructor."""
         self._description = ""
-        self._text = ""
+        self._text = []
         self._position = Point(0, 0)
         self._velocity = Point(0, 0)
+        self._base_hitbox = []
+        self.current_hitbox = []
+        self._color = 7 # 0:BLACK 1:RED 2:GREEN 3:YELLOW 4:BLUE 5:MAGENTA 6:CYAN 7:WHITE
+
+    def _init_hitbox(self):
+        for y in range(len(self._text)):
+            for x in range(len(self._text[y])):
+                if self._text[y][x] is not " ":
+                    self._base_hitbox.append(Point(x, y))
+        self.current_hitbox = self._base_hitbox
+
+    def _init_color(self, color):
+        self._color = color
+
 
     def get_description(self):
         """Gets the artifact's description.
@@ -85,3 +99,19 @@ class Actor:
             position (Point): The given velocity.
         """
         self._velocity = velocity
+        
+    def get_base_hitbox(self):
+        return self._base_hitbox
+
+    def get_width(self):
+        width = 0
+        for line in self._text:
+            if len(line) > width:
+                width = len(line)
+        return width
+
+    def get_length(self):
+        return len(self._text)
+
+    def get_color(self):
+        return self._color
