@@ -22,6 +22,8 @@ from game.actor                     import Actor
 from game.xwing                     import Xwing
 from game.tie                       import Tie
 from game.falcon                    import Falcon
+from game.star                      import Star
+from game.shields                   import Shields
 
 from game.control_actors_action     import ControlActorsAction
 from game.draw_actors_action        import DrawActorsAction
@@ -37,9 +39,17 @@ def main(screen):
     # create the cast of Actors {key: string, value: list}
     cast = {}
 
+    background = []
+    for i in range( constants.MAX_Y, -1000, -1):
+        x = random.randint(1, constants.MAX_X)
+        y = i
+        star = Star(Point(x,y))
+        background.append(star)
+    cast["background"] = background
+
     ties = []
-    for x in range(10, 200, 20):
-        tie = Tie(Point(x, 2))
+    for y in range(10, -1000, -20):
+        tie = Tie( Point( random.randint(2, constants.MAX_X - 20), y ) )
         ties.append(tie)
     cast["enemy"] = ties
 
@@ -51,6 +61,9 @@ def main(screen):
     
     enemy_fire = []
     cast["enemy_fire"] = enemy_fire
+
+    shields = Shields( cast["player"][0].get_max_shields() )
+    cast["shields"] = [shields]
 
     
     # create the script of Actions {key: string, value: list}

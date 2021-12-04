@@ -23,9 +23,14 @@ class MoveActorsAction(Action):
         """
         for enemy in cast["enemy"]:
             enemy.update()
-            if random.randint(1, 100) <= 5:
+            if enemy.get_position().get_y() > 2 and random.randint(1, 100) <= 5:
                 fire = EnemyFire(enemy.get_fire_point())
                 cast["enemy_fire"].append(fire)
+
+        for star in cast["background"]:
+            star.update()
+
+        cast["shields"][0].update()
 
         for group in cast.values():
             for actor in group:

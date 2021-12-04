@@ -20,6 +20,7 @@ class Falcon(Actor):
         """
         super().__init__()
         self._thrust = Point(3, 1)
+        self._shields = 200
 
         position = Point(100, 20)
         self.set_position(position)
@@ -27,23 +28,38 @@ class Falcon(Actor):
         self._init_text()
         self._init_hitbox()
         self._init_color(4)
-    
+        
     def _init_text(self):
         text = []
         text.append("    /‾‾|  |‾‾\\")
-        text.append("   / o |  | o \\")
-        text.append("  / o  |__|  o \/‾\\")
-        text.append(" /               _/")
-        text.append("|   U   ||       |")
-        text.append("|==    <||>    ==|")
-        text.append("|    o      o    |")
-        text.append(" \     o  o     /")
-        text.append("   \__________/")
+        text.append("   /⠀o⠀|  |⠀o⠀\\")
+        text.append("  /⠀o⠀⠀|__|⠀⠀o⠀\/‾\\")
+        text.append(" /⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_/")
+        text.append("|⠀⠀⠀U⠀⠀⠀||⠀⠀⠀⠀⠀⠀⠀|")
+        text.append("|==⠀⠀⠀⠀<||>⠀⠀⠀⠀==|")
+        text.append("|⠀⠀⠀⠀o⠀⠀⠀⠀⠀⠀o⠀⠀⠀⠀|")
+        text.append(" \⠀⠀⠀⠀⠀o⠀⠀o⠀⠀⠀⠀⠀/")
+        text.append("   \__________/")   
+
+    # def _init_text(self):
+    #     text = []
+    #     text.append("    /‾‾|  |‾‾\\")
+    #     text.append("   / o |  | o \\")
+    #     text.append("  / o  |__|  o \/‾\\")
+    #     text.append(" /               _/")
+    #     text.append("|   U   ||       |")
+    #     text.append("|==    <||>    ==|")
+    #     text.append("|    o      o    |")
+    #     text.append(" \     o  o     /")
+    #     text.append("   \__________/")
 
         self._text = text
 
     def get_thrust(self):
         return self._thrust
+
+    def get_max_shields(self):
+        return self._shields
 
     def get_fire_point(self):
         x = self.get_position().get_x() + random.randint(8, 9)

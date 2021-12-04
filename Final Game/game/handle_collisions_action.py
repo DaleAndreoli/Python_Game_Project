@@ -17,8 +17,6 @@ class HandleCollisionsAction(Action):
         Args:
             cast (dict): The game actors {key: tag, value: list}.
         """
-        # TODO
-
         # Calculate this frame's current hitbox for each Actor
         for group in cast.values():
             for actor in group:
@@ -38,6 +36,8 @@ class HandleCollisionsAction(Action):
         enemies = cast["enemy"]
         player = cast["player"][0]
         friendly_fires = cast["friendly_fire"]
+        enemy_fires = cast["enemy_fire"]
+        shields = cast["shields"][0]
 
         player_hitbox = player.current_hitbox
 
@@ -68,6 +68,16 @@ class HandleCollisionsAction(Action):
                     if player_point.equals(enemy_point):
                         enemy.set_position(Point(-1000, -1000))
                         enemy.set_velocity(Point(0,0))
+                        shields.remove_shields(20)
+
+        # Player / Enemy Fire Collision
+        for fire in enemy_fires:
+            fire_point = fire.get_position()
+            for player_point in player_hitbox:
+                if player_point.equals(fire_point):
+                    fire.set_position(Point(-10, -10))
+                    fire.set_velocity(Point(0, 0))
+                    shields.remove_shields(10)
 
         # Enemy / Friendly Fire collision
         for enemy in enemies:
@@ -79,9 +89,18 @@ class HandleCollisionsAction(Action):
                         if enemy_point.equals(fire_point):
                             enemy.set_position(Point(-1000, -1000))
                             enemy.set_velocity(Point(0,0))
+                            fire.set_position(Point(-10, -10))
+                            fire.set_velocity(Point(0, 0))
 
         # Friendly Fire / Screen collisions
         for fire in friendly_fires:
             if fire.get_position().get_y() < 1:
                 fire.set_position(Point(-10, -10))
                 fire.set_velocity(Point(0, 0))
+                
+        # Enemy Fire / Screen collisions
+        for fire in enemy_fires:
+            if fire.get_position().get_y() > constants.MAX_Y - 1:
+                fire.set_position(Point(-10, -10))
+                fire.set_velocity(Point(0, 0))
+

@@ -37,8 +37,8 @@ class Tie(Actor):
         self._text = text
 
     def _init_velocity(self):
-        x = random.randint(-1, 1)
-        y = random.randint(-1, 1)
+        x = random.choice([-1, 1])
+        y = -1
 
         self.set_velocity(Point(x, y))
 
@@ -54,16 +54,27 @@ class Tie(Actor):
             x = -self.get_velocity().get_x()
             y = self.get_velocity().get_y()
             self.set_velocity(Point(x,y))
-
         # bottom enemy boundary
-        if  (self.get_position().get_y() > int(constants.MAX_Y * 2 / 3) ):
+        if (self.get_position().get_y() > int(constants.MAX_Y * 2 / 3) ):
             x = self.get_velocity().get_x()
             y = -self.get_velocity().get_y()
             self.set_velocity(Point(x,y))
-            
-        if  (self.get_position().get_y() < 2 ):
+        # Top screen edge    
+        if (self.get_position().get_y() < 2 ):
             x = self.get_velocity().get_x()
             y = 1
             self.set_velocity(Point(x,y))
+
+        # if on screen, random chance to reverse a direction
+        if (self.get_position().get_y() > 1):
+            if random.randint(1, 100) <= 5:
+                x = -self.get_velocity().get_x()
+                y = self.get_velocity().get_y()
+                self.set_velocity(Point(x,y))
+            if random.randint(1, 100) <= 5:
+                x = self.get_velocity().get_x()
+                y = -self.get_velocity().get_y()
+                self.set_velocity(Point(x,y))
+
 
     
