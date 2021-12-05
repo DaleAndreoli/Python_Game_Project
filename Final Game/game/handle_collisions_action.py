@@ -69,7 +69,7 @@ class HandleCollisionsAction(Action):
                     if player_point.equals(enemy_point):
                         enemy.set_position(Point(-1000, -1000))
                         enemy.set_velocity(Point(0,0))
-                        if shields.get_shields() > 0:
+                        if shields.get_shields() > constants.ENEMY_COLLISION_DAMAGE:
                             shields.remove_shields(constants.ENEMY_COLLISION_DAMAGE)
                         else:
                             hull.remove_hull(constants.ENEMY_COLLISION_DAMAGE)
@@ -81,7 +81,7 @@ class HandleCollisionsAction(Action):
                 if player_point.equals(fire_point):
                     fire.set_position(Point(-10, -10))
                     fire.set_velocity(Point(0, 0))
-                    if shields.get_shields() > 0:
+                    if shields.get_shields() > constants.ENEMY_FIRE_DAMAGE:
                         shields.remove_shields(constants.ENEMY_FIRE_DAMAGE)
                     else:
                         hull.remove_hull(constants.ENEMY_FIRE_DAMAGE)

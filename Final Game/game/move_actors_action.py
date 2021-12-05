@@ -23,7 +23,7 @@ class MoveActorsAction(Action):
         """
         for enemy in cast["enemy"]:
             enemy.update()
-            if enemy.get_position().get_y() > 2 and random.randint(1, 100) <= 5:
+            if enemy.get_position().get_y() > 2 and random.randint(1, 100) <= constants.ENEMY_FIRE_CHANCE:
                 fire = EnemyFire(enemy.get_fire_point())
                 cast["enemy_fire"].append(fire)
 

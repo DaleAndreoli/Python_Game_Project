@@ -20,6 +20,8 @@ from game.point                     import Point
 from game.director                  import Director
 from game.actor                     import Actor
 from game.xwing                     import Xwing
+from game.awing                     import Awing
+from game.ywing                     import Ywing
 from game.tie                       import Tie
 from game.falcon                    import Falcon
 from game.star                      import Star
@@ -51,17 +53,24 @@ def main(screen):
     cast["background"] = background
 
     ties = []
-    for y in range(10, -1000, -20):
+    for y in range(0, -(constants.DISTANCE_BETWEEN_ENEMIES * constants.TOTAL_ENEMIES), -constants.DISTANCE_BETWEEN_ENEMIES):
         tie = Tie( Point( random.randint(2, constants.MAX_X - 20), y ) )
         ties.append(tie)
     cast["enemy"] = ties
 
+    ywing = Ywing()
+    awing = Awing()
+    xwing = Xwing()
     falcon = Falcon()
-    cast["player"] = [falcon]
+    ships = [xwing, awing, ywing, falcon]
 
+    hangar_input = InputService(screen)
+    hangar_output = OutputService(screen)
+    cast["player"] = [ships[choose_ship(hangar_input, hangar_output)]]
+
+    # Initialize Blaster Fire
     friendly_fire = []
     cast["friendly_fire"] = friendly_fire
-    
     enemy_fire = []
     cast["enemy_fire"] = enemy_fire
 
@@ -95,5 +104,50 @@ def main(screen):
     director = Director(cast, script)
     director.start_game()
 
+def choose_ship(input_service, output_service):
+    hangar_y = int(constants.MAX_Y / 3)
+
+    xwing = Xwing()
+    x = int(constants.MAX_X * 1 / 5) - xwing.get_width()
+    y = hangar_y
+    xwing.set_position(Point(x,y))
+    x_stats = Actor()
+    x_stats.set_text(xwing.get_stats())
+    x_stats.set_position(Point(x, y + 10))
+
+    awing = Awing()
+    x = int(constants.MAX_X * 2 / 5) - awing.get_width()
+    y = hangar_y
+    awing.set_position(Point(x,y))
+    a_stats = Actor()
+    a_stats.set_text(awing.get_stats())
+    a_stats.set_position(Point(x, y + 10))
+
+    ywing = Ywing()
+    x = int(constants.MAX_X * 3 / 5) - ywing.get_width()
+    y = hangar_y
+    ywing.set_position(Point(x,y))
+    y_stats = Actor()
+    y_stats.set_text(ywing.get_stats())
+    y_stats.set_position(Point(x, y + 10))
+
+    falcon = Falcon()
+    x = int(constants.MAX_X * 4 / 5) - falcon.get_width()
+    y = hangar_y
+    falcon.set_position(Point(x,y))
+    f_stats = Actor()
+    f_stats.set_text(falcon.get_stats())
+    f_stats.set_position(Point(x, y + 10))
+
+    ships = [xwing, awing, ywing, falcon]
+    stats = [f_stats, x_stats, a_stats, y_stats]
+
+    output_service.clear_screen()
+    output_service.draw_actors(ships)
+    output_service.draw_actors(stats)
+    output_service.flush_buffer()
+
+    choice = input_service.get_ship()
+    return choice
 
 Screen.wrapper(main)

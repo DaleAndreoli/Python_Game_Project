@@ -21,7 +21,7 @@ class Shields(Actor):
 
     def update(self):
         if self._shields < self._max_shields:
-            self._shields += 1
+            self._shields += int(constants.SHIELD_REGEN / 100 * self._max_shields)
         shield_segments = int( 30 * self._shields / self._max_shields )
         self._text[0] = "[⊙ ]" + "█" * shield_segments
 

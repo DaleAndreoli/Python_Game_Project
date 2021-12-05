@@ -3,7 +3,7 @@ from game.actor import Actor
 from game.point import Point
 from game import constants
 
-class Xwing(Actor):
+class Awing(Actor):
     """Points earned. The responsibility of Score is to keep track of the player's points.
 
     Stereotype:
@@ -20,11 +20,11 @@ class Xwing(Actor):
             self (Score): an instance of Score.
         """
         super().__init__()
-        self._thrust  = constants.XWING_THRUST
-        self._shields = constants.XWING_SHIELDS
-        self._engines = constants.XWING_ENGINES
-        self._weapons = constants.XWING_WEAPONS
-        self._hull    = constants.XWING_HULL
+        self._thrust  = constants.AWING_THRUST
+        self._shields = constants.AWING_SHIELDS
+        self._engines = constants.AWING_ENGINES
+        self._weapons = constants.AWING_WEAPONS
+        self._hull    = constants.AWING_HULL
 
         position = Point( int(constants.MAX_X / 2), constants.MAX_Y - (self.get_length() + 1))
         self.set_position(position)
@@ -38,25 +38,25 @@ class Xwing(Actor):
     
     def _init_text(self):
         text = []
-        text.append("        /‾\\")
-        text.append("       |⠀⠀⠀|")
-        text.append("       |⠀⠀⠀|")
-        text.append("||     |⠀_⠀|     ||")
-        text.append("||     |/_\|     ||")
-        text.append("||————||⠀o⠀||————||")
-        text.append("||____||___||____||")
+        text.append("    /‾|‾\\")
+        text.append("   /⠀⠀|⠀⠀\\")
+        text.append("| /⠀⠀⠀_⠀⠀⠀\ |")
+        text.append("||⠀⠀⠀/_\⠀⠀⠀||")
+        text.append("||__⠀| |⠀__||")
+        text.append("  ||_____||")
+        text.append("  ||     ||")
         self._text = text
 
     def _init_stats(self):
         text = []
-        text.append("Starfighter")
+        text.append("Interceptor")
         text.append("")
-        text.append("Weapons: ★ ★ ★ ★")
-        text.append("Engines: ★ ★ ★")
-        text.append("Shields: ★ ★ ★ ★") 
-        text.append("Hull:    ★ ★ ★")
+        text.append("Weapons: ★ ★ ★ ★ ★")
+        text.append("Engines: ★ ★ ★ ★ ★")
+        text.append("Shields: ★ ★") 
+        text.append("Hull:    ★ ★")
         text.append("")
-        text.append("Press X to select")
+        text.append("Press A to select")
         self._stats = text
 
     def get_stats(self):
@@ -78,7 +78,7 @@ class Xwing(Actor):
         return self._hull
 
     def get_fire_point(self):
-        x = self.get_position().get_x() + random.choice([0,1,17,18])
-        y = self.get_position().get_y() + 4
+        x = self.get_position().get_x() + random.choice([0,12])
+        y = self.get_position().get_y() + 3
         point = Point(x, y)
         return point

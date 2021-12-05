@@ -48,3 +48,19 @@ class InputService:
                 return True
         
         return False
+
+    def get_ship(self):
+        choice = -1
+        while choice == -1:
+            event = self._screen.get_event()
+            if isinstance(event, KeyboardEvent):
+                if event.key_code == 120: # x
+                    choice = 0
+                elif event.key_code == 97: # a
+                    choice = 1
+                elif event.key_code == 121: # y
+                    choice = 2
+                elif event.key_code == 102: # f
+                    choice = 3
+
+        return choice

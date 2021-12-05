@@ -26,10 +26,13 @@ class Falcon(Actor):
         self._weapons = constants.FALCON_WEAPONS
         self._hull    = constants.FALCON_HULL
 
-        position = Point(100, 20)
+        position = Point( int(constants.MAX_X / 2), constants.MAX_Y - (self.get_length() + 1))
         self.set_position(position)
 
+        self._stats = []
+
         self._init_text()
+        self._init_stats()
         self._init_hitbox()
         self._init_color(4)
         
@@ -45,6 +48,21 @@ class Falcon(Actor):
         text.append(" \⠀⠀⠀⠀⠀o⠀⠀o⠀⠀⠀⠀⠀/")
         text.append("   \__________/")   
         self._text = text
+
+    def _init_stats(self):
+        text = []
+        text.append("Light Freighter")
+        text.append("")
+        text.append("Weapons: ★ ★")
+        text.append("Engines: ★ ★ ★")
+        text.append("Shields: ★ ★ ★ ★ ★") 
+        text.append("Hull:    ★ ★ ★ ★")
+        text.append("")
+        text.append("Press F to select")
+        self._stats = text
+
+    def get_stats(self):
+        return self._stats
 
     def get_thrust(self):
         return self._thrust
