@@ -7,7 +7,7 @@ class Shields(Actor):
     def __init__(self, max_shields):
         super().__init__()
 
-        self.set_position(Point(1, constants.MAX_Y - 1))
+        self.set_position(Point(1, constants.MAX_Y - 2))
         self._init_color(2)
 
         self._init_text()
@@ -20,8 +20,13 @@ class Shields(Actor):
         self._text = text
 
     def update(self):
+        if self._shields < self._max_shields:
+            self._shields += 1
         shield_segments = int( 30 * self._shields / self._max_shields )
         self._text[0] = "[⊙ ]" + "█" * shield_segments
 
     def remove_shields(self, damage):
         self._shields -= damage
+
+    def get_shields(self):
+        return self._shields

@@ -1,7 +1,20 @@
 import os
+from game.point import Point
 
 MAX_X = 260
 MAX_Y = 80
 FRAME_LENGTH = 0.05
 PATH = os.path.dirname(os.path.abspath(__file__))
 ARTIFACTS = 30
+
+ENEMY_FIRE_DAMAGE = 40
+ENEMY_COLLISION_DAMAGE = 40
+
+FIRE_COST = 10
+THRUST_COST = 10
+
+FALCON_THRUST   = Point(3, 1)
+FALCON_SHIELDS  = 200
+FALCON_ENGINES  = 100
+FALCON_WEAPONS  = 100
+FALCON_HULL     = 2000

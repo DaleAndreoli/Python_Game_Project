@@ -31,26 +31,33 @@ class ControlActorsAction(Action):
         # Adjust the player's velocity according to WASD input
         acceleration = self._input_service.get_direction()
         player = cast["player"][0]
+        friendly_fire = cast["friendly_fire"]
+        weapons = cast["weapons"][0]
+        engines = cast["engines"][0]
 
-        velocity = player.get_velocity()
-        thrust = player.get_thrust()
+        if engines.get_engines() > constants.THRUST_COST and not acceleration.equals(Point(0,0)):
+            engines.remove_engines(constants.THRUST_COST)
 
-        x1 = velocity.get_x()
-        x2 = acceleration.get_x()
-        x3 = thrust.get_x()
-        
-        y1 = velocity.get_y()
-        y2 = acceleration.get_y()
-        y3 = thrust.get_y()
+            velocity = player.get_velocity()
+            thrust = player.get_thrust()
 
-        x = x1 + (x2 * x3)
-        y = y1 + (y2 * y3)
+            x1 = velocity.get_x()
+            x2 = acceleration.get_x()
+            x3 = thrust.get_x()
+            
+            y1 = velocity.get_y()
+            y2 = acceleration.get_y()
+            y3 = thrust.get_y()
 
-        new_velocity = Point(x, y)
+            x = x1 + (x2 * x3)
+            y = y1 + (y2 * y3)
 
-        player.set_velocity(new_velocity)
+            new_velocity = Point(x, y)
+
+            player.set_velocity(new_velocity)
 
         # fire if Space is pressed
-        if self._input_service.get_fire() == True:
+        if self._input_service.get_fire() == True and weapons.get_weapons() > constants.FIRE_COST:
             fire = FriendlyFire(player.get_fire_point())
-            cast["friendly_fire"].append(fire)
+            friendly_fire.append(fire)
+            weapons.remove_weapons(constants.FIRE_COST)

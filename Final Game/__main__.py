@@ -24,6 +24,9 @@ from game.tie                       import Tie
 from game.falcon                    import Falcon
 from game.star                      import Star
 from game.shields                   import Shields
+from game.engines                   import Engines
+from game.weapons                   import Weapons
+from game.hull                      import Hull
 
 from game.control_actors_action     import ControlActorsAction
 from game.draw_actors_action        import DrawActorsAction
@@ -62,8 +65,15 @@ def main(screen):
     enemy_fire = []
     cast["enemy_fire"] = enemy_fire
 
+    # Initialize Ship Systems
     shields = Shields( cast["player"][0].get_max_shields() )
     cast["shields"] = [shields]
+    engines = Engines( cast["player"][0].get_max_engines() )
+    cast["engines"] = [engines]
+    weapons = Weapons( cast["player"][0].get_max_weapons() )
+    cast["weapons"] = [weapons]
+    hull = Hull( cast["player"][0].get_max_hull() )
+    cast["hull"] = [hull]
 
     
     # create the script of Actions {key: string, value: list}

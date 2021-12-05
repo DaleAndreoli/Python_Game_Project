@@ -31,6 +31,9 @@ class MoveActorsAction(Action):
             star.update()
 
         cast["shields"][0].update()
+        cast["engines"][0].update()
+        cast["weapons"][0].update()
+        cast["hull"][0].update()
 
         for group in cast.values():
             for actor in group:

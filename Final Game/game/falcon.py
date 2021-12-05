@@ -1,6 +1,7 @@
 import random
 from game.actor import Actor
 from game.point import Point
+from game import constants
 
 class Falcon(Actor):
     """Points earned. The responsibility of Score is to keep track of the player's points.
@@ -19,8 +20,11 @@ class Falcon(Actor):
             self (Score): an instance of Score.
         """
         super().__init__()
-        self._thrust = Point(3, 1)
-        self._shields = 200
+        self._thrust  = constants.FALCON_THRUST
+        self._shields = constants.FALCON_SHIELDS
+        self._engines = constants.FALCON_ENGINES
+        self._weapons = constants.FALCON_WEAPONS
+        self._hull    = constants.FALCON_HULL
 
         position = Point(100, 20)
         self.set_position(position)
@@ -40,19 +44,6 @@ class Falcon(Actor):
         text.append("|⠀⠀⠀⠀o⠀⠀⠀⠀⠀⠀o⠀⠀⠀⠀|")
         text.append(" \⠀⠀⠀⠀⠀o⠀⠀o⠀⠀⠀⠀⠀/")
         text.append("   \__________/")   
-
-    # def _init_text(self):
-    #     text = []
-    #     text.append("    /‾‾|  |‾‾\\")
-    #     text.append("   / o |  | o \\")
-    #     text.append("  / o  |__|  o \/‾\\")
-    #     text.append(" /               _/")
-    #     text.append("|   U   ||       |")
-    #     text.append("|==    <||>    ==|")
-    #     text.append("|    o      o    |")
-    #     text.append(" \     o  o     /")
-    #     text.append("   \__________/")
-
         self._text = text
 
     def get_thrust(self):
@@ -60,6 +51,15 @@ class Falcon(Actor):
 
     def get_max_shields(self):
         return self._shields
+
+    def get_max_engines(self):
+        return self._engines
+
+    def get_max_weapons(self):
+        return self._weapons
+
+    def get_max_hull(self):
+        return self._hull
 
     def get_fire_point(self):
         x = self.get_position().get_x() + random.randint(8, 9)
