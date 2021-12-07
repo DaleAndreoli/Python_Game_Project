@@ -7,8 +7,6 @@ FRAME_LENGTH = 0.05
 PATH = os.path.dirname(os.path.abspath(__file__))
 ARTIFACTS = 30
 
-CHOICE = 1
-
 ENEMY_FIRE_DAMAGE = 40
 ENEMY_COLLISION_DAMAGE = 10
 ENEMY_FIRE_CHANCE = 10 # Percent chance per frame to fire
