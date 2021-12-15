@@ -1,3 +1,23 @@
+#
+# Description:
+#   The parent class used by anything that needs to be drawn on the screen. 
+#   Initializes default values such as position and text.
+#   Creates the director and passes it the cast and script to start the game. 
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#
+# Reasoning:
+#   Abstraction is used here to calculate things like the Actors length, width 
+#       and hitbox.
+#   Encapsulation is used for most of the attributes of this class and are 
+#       modified by method funcitons.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits default values from Actor. 
+# 
+
 from game import constants
 from game.point import Point
 
@@ -7,12 +27,6 @@ class Actor:
 
     Stereotype:
         Information Holder
-
-    Attributes:
-        _tag (string): The actor's tag.
-        _text (string): The textual representation of the actor.
-        _position (Point): The actor's position in 2d space.
-        _velocity (Point): The actor's speed and direction.
     """
 
     def __init__(self):

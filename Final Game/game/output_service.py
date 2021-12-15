@@ -1,3 +1,15 @@
+#
+# Description:
+#   Used to interface with the asciimatics library to draw outputs to the screen..
+#
+# OOP Principles Used:
+#   Abstraction
+#
+# Reasoning:
+#   Abstraction is used to handle output within this class so that other 
+#       files do not need to worry about what is happening under the hood here. 
+#
+
 import sys
 from game import constants
 from asciimatics.widgets import Frame

@@ -1,3 +1,16 @@
+#
+# Description:
+#   The game loop event that reads input and affects the player ship accordingly.
+#   Establishes the execute method that is specific to this event.
+#
+# OOP Principles Used:
+#   Polymorphism
+#
+# Reasoning:
+#   Polymorphism is used by this event as it inherits from Action, but changes
+#       the .execute() method to perform its specific action.
+# 
+
 from game import constants
 from game.action import Action
 from game.point import Point
@@ -30,6 +43,7 @@ class ControlActorsAction(Action):
         """
         # Adjust the player's velocity according to WASD input
         acceleration = self._input_service.get_direction()
+        fire = self._input_service.get_fire()
         player = cast["player"][0]
         friendly_fire = cast["friendly_fire"]
         weapons = cast["weapons"][0]
@@ -57,7 +71,7 @@ class ControlActorsAction(Action):
             player.set_velocity(new_velocity)
 
         # fire if Space is pressed
-        if self._input_service.get_fire() == True and weapons.get_weapons() > constants.FIRE_COST:
+        if fire == 1 and weapons.get_weapons() > constants.FIRE_COST:
             fire = FriendlyFire(player.get_fire_point())
             friendly_fire.append(fire)
             weapons.remove_weapons(constants.FIRE_COST)

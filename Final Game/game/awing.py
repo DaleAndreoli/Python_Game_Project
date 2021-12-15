@@ -1,24 +1,31 @@
+#
+# Description:
+#   A type of ship the player may select. 
+#   Inherits from actor so that it may be drawn on the screen.
+#   Initializes values specific to this type of ship.
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#
+# Reasoning:
+#   Abstraction is used here to hold the ships ascii art and calculate the 
+#       position to create a friendly_fire.
+#   Encapsulation is used for most of the attributes of this class and are 
+#       modified by method funcitons.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits default values from Actor. Some of these values are modified 
+#       to fit the needs of this ship.
+# 
+
 import random
 from game.actor import Actor
 from game.point import Point
 from game import constants
 
 class Awing(Actor):
-    """Points earned. The responsibility of Score is to keep track of the player's points.
-
-    Stereotype:
-        Information Holder
-
-    Attributes: 
-        _points (integer): The number of points the score is worth.
-    """
     def __init__(self):
-        """The class constructor. Invokes the superclass constructor, initializes points to zero, 
-        sets the position and updates the text.
-        
-        Args:
-            self (Score): an instance of Score.
-        """
         super().__init__()
         self._thrust  = constants.AWING_THRUST
         self._shields = constants.AWING_SHIELDS

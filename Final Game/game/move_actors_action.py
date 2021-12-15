@@ -1,3 +1,16 @@
+#
+# Description:
+#   The game loop event that updates each actor.
+#   Establishes the execute method that is specific to this event.
+#
+# OOP Principles Used:
+#   Polymorphism
+#
+# Reasoning:
+#   Polymorphism is used by this event as it inherits from Action, but changes
+#       the .execute() method to perform its specific action.
+# 
+
 import random
 from game import constants
 from game.action import Action

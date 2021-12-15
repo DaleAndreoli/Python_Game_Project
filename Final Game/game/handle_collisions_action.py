@@ -1,3 +1,16 @@
+#
+# Description:
+#   The game loop event that handles collisions between different actors.
+#   Establishes the execute method that is specific to this event.
+#
+# OOP Principles Used:
+#   Polymorphism
+#
+# Reasoning:
+#   Polymorphism is used by this event as it inherits from Action, but changes
+#       the .execute() method to perform its specific action.
+# 
+
 import random
 import sys
 from game import constants
@@ -10,7 +23,6 @@ class HandleCollisionsAction(Action):
     Stereotype:
         Controller
     """
-
     def execute(self, cast):
         """Executes the action using the given actors.
 
@@ -67,8 +79,7 @@ class HandleCollisionsAction(Action):
             for enemy_point in enemy_hitbox:
                 for player_point in player_hitbox:
                     if player_point.equals(enemy_point):
-                        enemy.set_position(Point(-1000, -1000))
-                        enemy.set_velocity(Point(0,0))
+                        enemy.kill()
                         if shields.get_shields() > constants.ENEMY_COLLISION_DAMAGE:
                             shields.remove_shields(constants.ENEMY_COLLISION_DAMAGE)
                         else:
@@ -94,8 +105,7 @@ class HandleCollisionsAction(Action):
                     fire_hitbox = fire.current_hitbox
                     for fire_point in fire_hitbox:
                         if enemy_point.equals(fire_point):
-                            enemy.set_position(Point(-1000, -1000))
-                            enemy.set_velocity(Point(0,0))
+                            enemy.kill()
                             fire.set_position(Point(-10, -10))
                             fire.set_velocity(Point(0, 0))
 

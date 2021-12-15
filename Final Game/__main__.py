@@ -1,13 +1,26 @@
-""" 
-Bonus Features:
-- Game Over Screen
-- Score
-- Lives
-- Bigger Bricks
-- Paddle region determines ball bounce direction
-- Alternative controls:             (Tested on Windows)
-    left/right arrow keys, lowercase a/d, uppercase A/D 
-"""
+#
+# Description:
+#   Creates the various actors and adds them to the cast list. 
+#   Establishes the various actions that will comprise the script.
+#   Creates the director and passes it the cast and script to start the game. 
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#   Polymorphism
+#
+# Reasoning:
+#   Abstraction is used when a class handles things under the hood that we
+#       don't need to worry about in other files. 
+#   Encapsulation is used by the classes that have attributes that cannot 
+#       be changed from other files unless the proper method is called.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits from Actor. It is also used by the events of the game loop, 
+#       which all inherit from Action.
+#   Polymorphism is used by the events that make up the game loop. 
+#       They each implement different versions of the same .execute() method.
+#   
 
 import random
 from asciimatics.screen             import Screen 
@@ -35,12 +48,8 @@ from game.draw_actors_action        import DrawActorsAction
 from game.handle_collisions_action  import HandleCollisionsAction
 from game.move_actors_action        import MoveActorsAction
 
-
 def main(screen):
-    """Creates the various actors and adds them to the cast list. 
-    Establishes the various actions that will comprise the script.
-    Creates the director and passes it the cast and script to start the game.
-    """
+
     # create the cast of Actors {key: string, value: list}
     cast = {}
 
@@ -83,7 +92,6 @@ def main(screen):
     cast["weapons"] = [weapons]
     hull = Hull( cast["player"][0].get_max_hull() )
     cast["hull"] = [hull]
-
     
     # create the script of Actions {key: string, value: list}
     script = {}
@@ -105,6 +113,8 @@ def main(screen):
     director.start_game()
 
 def choose_ship(input_service, output_service):
+    display_tutorials(output_service)
+
     hangar_y = int(constants.MAX_Y / 3)
 
     xwing = Xwing()
@@ -142,12 +152,54 @@ def choose_ship(input_service, output_service):
     ships = [xwing, awing, ywing, falcon]
     stats = [f_stats, x_stats, a_stats, y_stats]
 
-    output_service.clear_screen()
     output_service.draw_actors(ships)
     output_service.draw_actors(stats)
     output_service.flush_buffer()
 
     choice = input_service.get_ship()
     return choice
+
+def display_tutorials(output_service):
+    shields = Shields(100)
+    s_hint = Actor()
+    s_hint.set_text(shields.get_hint())
+    x = shields.get_position().get_x() + 5
+    y = shields.get_position().get_y()
+    s_hint.set_position(Point(x,y))
+
+    engines = Engines(100)
+    e_hint = Actor()
+    e_hint.set_text(engines.get_hint())
+    x = engines.get_position().get_x() + 5
+    y = engines.get_position().get_y()
+    e_hint.set_position(Point(x,y))
+
+    weapons = Weapons(100)
+    w_hint = Actor()
+    w_hint.set_text(weapons.get_hint())
+    x = weapons.get_position().get_x() + 5
+    y = weapons.get_position().get_y()
+    w_hint.set_position(Point(x,y))
+
+    hull = Hull(100)
+    h_hint = Actor()
+    h_hint.set_text(hull.get_hint())
+    x = hull.get_position().get_x() + 5
+    y = hull.get_position().get_y()
+    h_hint.set_position(Point(x,y))
+
+    mission = Actor()
+    total_enemies = str(constants.TOTAL_ENEMIES)
+    mission_text = "Your mission is to destroy " + total_enemies + " enemies."
+    mission.set_text([mission_text])
+    x = int( (constants.MAX_X / 2) - (len(mission_text) / 2) )
+    y = 8
+    mission.set_position(Point(x,y))
+
+    tutorials = [mission, hull, h_hint, weapons, w_hint, engines, e_hint, shields, s_hint]
+
+    output_service.clear_screen()
+    output_service.draw_actors(tutorials)
+    output_service.flush_buffer()
 
 Screen.wrapper(main)

@@ -1,3 +1,21 @@
+#
+# Description:
+#   The stars that pass by during gameplay. 
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#
+# Reasoning:
+#   Abstraction is used here to update the attributes each frame without worrying about 
+#       what that entails when update() is called in the proper game event.
+#   Encapsulation is used for most of the attributes of this class and are 
+#       modified by method funcitons. These attributes are mostly those inherited from Actor.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits default values from Actor. 
+# 
+
 import random
 from game import constants
 from game.actor import Actor

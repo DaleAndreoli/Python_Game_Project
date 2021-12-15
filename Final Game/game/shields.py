@@ -1,3 +1,21 @@
+#
+# Description:
+#   UI element that displays the players shields' energy level.
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#
+# Reasoning:
+#   Abstraction is used here to hold and update the UI element's ascii art.
+#   Encapsulation is used for most of the attributes of this class and are 
+#       modified by method funcitons.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits default values from Actor. Some of these values are modified 
+#       to fit the needs of this UI element.
+# 
+
 import random
 from game import constants
 from game.actor import Actor
@@ -30,3 +48,6 @@ class Shields(Actor):
 
     def get_shields(self):
         return self._shields
+
+    def get_hint(self):
+        return ["Taking fire or colliding with enemies will reduce your shields' energy. This resource will recharge over time."]

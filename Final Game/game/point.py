@@ -1,3 +1,19 @@
+#
+# Description:
+#   Holds an (x, y) coordinate pair.
+#   Used elsewhere to represent position, velocity, direction, etc.
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#
+# Reasoning:
+#   Abstraction is used here to allow other files to conveniently compare
+#       two Points to see if they are equal.
+#   Encapsulation is used here to store the x and y values. They can 
+#       only be changed by the method functions of this class.
+#   
+
 class Point:
     """Represents distance from an origin (0, 0).
 

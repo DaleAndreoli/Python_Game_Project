@@ -1,3 +1,16 @@
+#
+# Description:
+#   This class cues the different game loop events and executes them in order.
+#
+# OOP Principles Used:
+#   Polymorphism
+#
+# Reasoning:
+#   Polymorphism is used by each game loop event as they all inherit the .execute() method.
+#       Each event has a unique .execute() method, but polymorphism allows them to be 
+#       called in a loop in cue_action()
+# 
+
 from time import sleep
 from game import constants
 

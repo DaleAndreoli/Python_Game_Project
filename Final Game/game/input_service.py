@@ -1,3 +1,15 @@
+#
+# Description:
+#   Used to interface with the asciimatics library to handle player inputs.
+#
+# OOP Principles Used:
+#   Abstraction
+#
+# Reasoning:
+#   Abstraction is used to handle input within this class so that other 
+#       files do not need to worry about what is happening under the hood here. 
+#
+
 import sys
 from game.point import Point
 from asciimatics.event import KeyboardEvent
@@ -43,11 +55,13 @@ class InputService:
     def get_fire(self):
         event = self._screen.get_event()
 
+        fire = False
+
         if isinstance(event, KeyboardEvent):
             if event.key_code == 32:    # Space
-                return True
+                fire = True
         
-        return False
+        return fire
 
     def get_ship(self):
         choice = -1

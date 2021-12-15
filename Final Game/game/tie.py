@@ -1,26 +1,35 @@
+#
+# Description:
+#   An enemy ship that tries to fire at the player. 
+#   Inherits from actor so that it may be drawn on the screen.
+#   Initializes values specific to this type of ship.
+#
+# OOP Principles Used:
+#   Abstraction
+#   Encapsulation
+#   Inheritance
+#
+# Reasoning:
+#   Abstraction is used here to hold the ships ascii art and calculate the 
+#       position to create an enemy_fire.
+#   Encapsulation is used for most of the attributes of this class and are 
+#       modified by method funcitons that can be called from other files.
+#   Inheritance is used by actors. Anything that is drawn on the screen 
+#       inherits default values from Actor. Some of these values are modified 
+#       to fit the needs of this ship.
+# 
+
 import random
 from game import constants
 from game.actor import Actor
 from game.point import Point
 
 class Tie(Actor):
-    """Points earned. The responsibility of Score is to keep track of the player's points.
-
-    Stereotype:
-        Information Holder
-
-    Attributes: 
-        _points (integer): The number of points the score is worth.
-    """
     def __init__(self, position):
-        """The class constructor. Invokes the superclass constructor, initializes points to zero, 
-        sets the position and updates the text.
-        
-        Args:
-            self (Score): an instance of Score.
-        """
         super().__init__()
         self.set_position(position)
+
+        self._is_alive = True
 
         self._init_text()
         self._init_hitbox()
@@ -60,7 +69,7 @@ class Tie(Actor):
             y = -self.get_velocity().get_y()
             self.set_velocity(Point(x,y))
         # Top screen edge    
-        if (self.get_position().get_y() < 2 ):
+        if (self.get_position().get_y() < 2 and self.get_position().get_x() > -10):
             x = self.get_velocity().get_x()
             y = 1
             self.set_velocity(Point(x,y))
@@ -75,6 +84,11 @@ class Tie(Actor):
                 x = self.get_velocity().get_x()
                 y = -self.get_velocity().get_y()
                 self.set_velocity(Point(x,y))
-
-
     
+    def kill(self):
+        self.set_position(Point(-1000, -1000))
+        self.set_velocity(Point(0,0))
+        self._is_alive = False
+
+    def is_alive(self):
+        return self._is_alive
