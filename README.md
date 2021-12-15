@@ -23,7 +23,7 @@ $ pip install asciimatics
 
 # Configure Your Output Terminal
 
-This project uses the output terminal to display a screen 260 characters wide and 80 characters tall. This can exceed default terminal setting prevent the game from rendering properly.
+This project uses the output terminal to display a screen 260 characters wide and 80 characters tall. This can exceed default terminal settings and prevent the game from rendering properly.
 
 To make the game more visible, you will likely need to resize your terminal to take up as much of the screen as possible.
 
