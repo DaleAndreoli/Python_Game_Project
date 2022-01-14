@@ -7,6 +7,7 @@ This project uses the Python library, Asciimatics, to handle the input and outpu
 <img src="Resources/Clip.gif" alt="gameplay" width="1500"/>
 <img src="Resources/Hangar.png" alt="gameplay" width="1500"/>
 
+Many of the classes in this project are based off a theater analogy in which a cast of actors that follow a script of actions to accomplish the main game loop.
 
 This project aims to demonstrate the following principles of Object Oriented Programming:
 * Abstraction
@@ -14,7 +15,15 @@ This project aims to demonstrate the following principles of Object Oriented Pro
 * Inheritance
 * Polymorphism
 
-Many of the classes in this project are based off a theater analogy in which a cast of actors that follow a script of actions to accomplish the main game loop.
+Some examples:
+
+Abstraction is used when a class handles things under the hood that we don't need to worry about from other files. 
+
+Encapsulation is used by the classes that have attributes that cannot be changed from other files unless the proper method is called.
+
+Inheritance is used by the "actors". Anything that is drawn on the screen inherits from Actor. It is also used by the events of the game loop, which all inherit from Action.
+
+Polymorphism is used by the events that make up the game loop. They each implement different versions of the same .execute() method.
 
 # Installation
 This project uses the [Asciimatics](https://asciimatics.readthedocs.io/en/stable/intro.html) library to handle input and output. 
