@@ -2,7 +2,7 @@
 and17081@byui.edu
 
 # Python Game Project
-This project uses the Python library, Asciimatics, to handle the input and output for a 2D game. The player selects their ship and tries to dsetroy enemy ships while avoiding damage. The game ends when the player is destroyed or all enemies are defeated.
+This project uses the Python library, Asciimatics, to handle the input and output for a 2D game. The player selects their ship and tries to destroy enemy ships while avoiding damage. The game ends when the player is destroyed or all enemies are defeated.
 
 <img src="Resources/Clip.gif" alt="gameplay" width="1500"/>
 <img src="Resources/Hangar.png" alt="gameplay" width="1500"/>
