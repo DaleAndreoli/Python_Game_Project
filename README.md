@@ -10,6 +10,7 @@ This project uses the Python library, Asciimatics, to handle the input and outpu
 Many of the classes in this project are based off a theater analogy in which a cast of actors that follow a script of actions to accomplish the main game loop.
 
 This project aims to demonstrate the following principles of Object Oriented Programming:
+
 * Abstraction
 * Encapsulation
 * Inheritance
